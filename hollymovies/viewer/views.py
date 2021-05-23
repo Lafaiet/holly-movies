@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Movie
 from django.views import View
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 
@@ -38,6 +38,29 @@ class CreateMovie(CreateView):
     model = Movie
     success_url = reverse_lazy('movies')
     fields = '__all__'
+
+
+class DetailMovie(DetailView):
+    template_name = 'detail_movie.html'
+    model = Movie
+    context_object_name = 'movie'
+
+
+class UpdateMovie(UpdateView):
+    template_name = 'update_movie.html'
+    model = Movie
+    success_url = reverse_lazy('movies')
+    fields = '__all__'
+    context_object_name = 'movie'
+
+
+class DeleteMovie(DeleteView):
+    template_name = 'delete_movie.html'
+    model = Movie
+    context_object_name = 'movie'
+    success_url = reverse_lazy('movies')
+
+
 
 
 

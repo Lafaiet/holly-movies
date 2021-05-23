@@ -1,8 +1,15 @@
 from django.db import models
-
+from .constants import COUNTRIES, LANGUAGES
 
 class Genre(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+class Language(models.Model):
+    name = models.CharField(max_length=50, choices=LANGUAGES)
 
     def __str__(self):
         return self.name
@@ -14,6 +21,9 @@ class Movie(models.Model):
     description = models.TextField(null=True, blank=True)
     release_date = models.DateTimeField(null=True, blank=True)
     genre = models.ForeignKey(Genre, on_delete=models.DO_NOTHING, null=True, blank=True)
+    country = models.CharField(max_length=50, null=True, blank=True, choices=COUNTRIES)
+    languages = models.ManyToManyField(Language)
+    cover = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.title

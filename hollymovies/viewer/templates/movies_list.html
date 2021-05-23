@@ -2,11 +2,14 @@
 
 {% block content %}
 
+Click <a href="{% url 'create_movie' %}">here</a> to create a new movie
+
+
 <h2>These are the movies we have:</h2>
 
 <ul>
   {% for movie in movies %}
-  <li>Name: {{movie.title}} genre: {{movie.genre.name|default:"No Genre"}}</li>
+  <li>Name: <a href="{% url 'detail_movie' movie.id %}"> {{movie.title}}</a> genre: {{movie.genre.name|default:"No Genre"}}</li>
     {% if movie.genre.name == 'Horror' %}
       Carefull!! This is terrifying!
     {% endif %}

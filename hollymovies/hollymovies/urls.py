@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from viewer.views import hello, total_movies, WelcomeView, MoviesList, CreateMovie
+from viewer.views import hello, total_movies, WelcomeView, MoviesList, \
+    CreateMovie, DetailMovie, UpdateMovie, DeleteMovie
+
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
@@ -26,5 +30,14 @@ urlpatterns = [
     path('total', total_movies, name='total'),
     path('welcome', WelcomeView.as_view(), name='welcome'),
     path('movies', MoviesList.as_view(),  name='movies'),
-    path('movies/create', CreateMovie.as_view(),  name='create_movie')
+    path('movies/create', CreateMovie.as_view(),  name='create_movie'),
+    path('movies/<int:pk>', DetailMovie.as_view(),  name='detail_movie'),
+    path('movies/<int:pk>/update', UpdateMovie.as_view(),  name='update_movie'),
+    path('movies/<int:pk>/delete', DeleteMovie.as_view(),  name='delete_movie'),
+
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

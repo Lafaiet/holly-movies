@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p> <img src="{{ movie.cover.url}}" width="300" height=auto></p>
+<p>Name: {{movie.title}}</p>
+<p>Genre: {{movie.genre.name|default:"-"}}</p>
+<p>Description: {{movie.description}}</p>
+<p>Languages: {% for lang in movie.languages.all %} {{lang.name}} {% endfor %}</p>
+
+<hr>
+
+
+<p>Click <a href="{% url 'update_movie' movie.id %}">here</a> to update this movie</p>
+<p>Click <a href="{% url 'delete_movie' movie.id %}">here</a> to delete this movie</p>
+
+
+{% endblock %}
