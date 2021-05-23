@@ -15,6 +15,10 @@ class Language(models.Model):
         return self.name
 
 
+class Person(models.Model):
+    name = models.CharField(max_length=50)
+
+
 class Movie(models.Model):
 
     title = models.CharField(max_length=100)
@@ -24,6 +28,8 @@ class Movie(models.Model):
     country = models.CharField(max_length=50, null=True, blank=True, choices=COUNTRIES)
     languages = models.ManyToManyField(Language)
     cover = models.ImageField(upload_to='images/', null=True, blank=True)
+    directors = models.ManyToManyField(Person, related_name='directors')
+    stars = models.ManyToManyField(Person, related_name='stars')
 
     def __str__(self):
         return self.title
