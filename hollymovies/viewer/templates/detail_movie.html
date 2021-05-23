@@ -2,7 +2,10 @@
 
 {% block content %}
 
-<p> <img src="{{ movie.cover.url}}" width="300" height=auto></p>
+{% if movie.cover %}
+    <p> <img src="{{ movie.cover.url}}" width="300" height=auto></p>
+{% endif %}
+
 <p>Name: {{movie.title}}</p>
 <p>Genre: {{movie.genre.name|default:"-"}}</p>
 <p>Description: {{movie.description}}</p>
