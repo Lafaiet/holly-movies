@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Movie
+from .models import Movie, Profile
 from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -71,6 +71,10 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('movies')
     form_class = SignUpForm
 
+class DetailProfile(DetailView):
+    template_name = 'detail_profile.html'
+    model = Profile
+    context_object_name = 'profile'
 
 
 

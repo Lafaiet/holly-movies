@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from viewer.views import hello, total_movies, WelcomeView, MoviesList, \
-    CreateMovie, DetailMovie, UpdateMovie, DeleteMovie, SignUpView
+    CreateMovie, DetailMovie, UpdateMovie, DeleteMovie, SignUpView, DetailProfile
 
 from django.conf.urls.static import static
 from django.conf import settings
@@ -37,6 +37,7 @@ urlpatterns = [
     path('movies/<int:pk>/delete', DeleteMovie.as_view(),  name='delete_movie'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('sign-up/', SignUpView.as_view(), name='sign_up'),
+    path('profile/<int:pk>', DetailProfile.as_view(),  name='detail_profile'),
 
 ]
 

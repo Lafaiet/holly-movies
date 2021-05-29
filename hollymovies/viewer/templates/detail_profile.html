@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<p>User name: {{profile.user.username}}</p>
+<p>Name: {{profile.user.firstname}}</p>
+<p>Biography: {{profile.biography}}</p>
+
+<hr>
+
+<p>Watch list:</p>
+<ul>
+{% for movie in profile.watch_list.all %}
+
+    <li>{{movie.title}}</li>
+
+{% endfor %}
+
+
+
+
+{% endblock %}

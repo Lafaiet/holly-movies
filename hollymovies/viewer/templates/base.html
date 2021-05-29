@@ -47,6 +47,9 @@
         {% else %}Hello, {{ user.username }}!{% endif %}
       </a>
       <div class="dropdown-menu dropdown-menu-right">
+        {% if  user.profile %}
+          <a class="dropdown-item text-right" href="{% url 'detail_profile' user.profile.id  %}">Profile</a>
+        {% endif %}
         <a class="dropdown-item text-right" href="{% url 'logout' %}">Logout</a>
         <a class="dropdown-item text-right" href="{% url 'password_change' %}">Change password</a>
       </div>

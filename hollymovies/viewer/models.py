@@ -1,5 +1,7 @@
 from django.db import models
 from .constants import COUNTRIES, LANGUAGES
+from django.contrib.auth.models import User
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=50)
@@ -33,3 +35,12 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Profile(models.Model):
+    biography = models.TextField(null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    watch_list = models.ManyToManyField(Movie)
+
+    def __str__(self):
+        return self.user.username
