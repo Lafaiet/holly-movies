@@ -4,6 +4,7 @@ from .models import Movie
 from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
@@ -33,7 +34,7 @@ class MoviesList(ListView):
     context_object_name = 'movies'
 
 
-class CreateMovie(CreateView):
+class CreateMovie(LoginRequiredMixin, CreateView):
     template_name = 'create_movie.html'
     model = Movie
     success_url = reverse_lazy('movies')

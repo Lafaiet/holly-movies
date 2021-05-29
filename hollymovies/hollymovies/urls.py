@@ -21,6 +21,7 @@ from viewer.views import hello, total_movies, WelcomeView, MoviesList, \
 
 from django.conf.urls.static import static
 from django.conf import settings
+from django.urls import include
 
 
 urlpatterns = [
@@ -34,6 +35,7 @@ urlpatterns = [
     path('movies/<int:pk>', DetailMovie.as_view(),  name='detail_movie'),
     path('movies/<int:pk>/update', UpdateMovie.as_view(),  name='update_movie'),
     path('movies/<int:pk>/delete', DeleteMovie.as_view(),  name='delete_movie'),
+    path('accounts/', include('django.contrib.auth.urls')),
 
 ]
 
