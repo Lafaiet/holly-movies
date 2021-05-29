@@ -5,6 +5,7 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from .forms import SignUpForm
 
 
 
@@ -63,6 +64,13 @@ class DeleteMovie(PermissionRequiredMixin, DeleteView):
     context_object_name = 'movie'
     success_url = reverse_lazy('movies')
     permission_required = 'viewer.delete_movie'
+
+
+class SignUpView(CreateView):
+    template_name = 'create_profile.html'
+    success_url = reverse_lazy('movies')
+    form_class = SignUpForm
+
 
 
 
