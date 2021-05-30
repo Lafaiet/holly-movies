@@ -30,8 +30,10 @@ class Movie(models.Model):
     country = models.CharField(max_length=50, null=True, blank=True, choices=COUNTRIES)
     languages = models.ManyToManyField(Language)
     cover = models.ImageField(upload_to='images/', null=True, blank=True)
-    directors = models.ManyToManyField(Person, related_name='directors')
-    stars = models.ManyToManyField(Person, related_name='stars')
+    directors = models.ManyToManyField(Person, related_name='directors', blank=True)
+    stars = models.ManyToManyField(Person, related_name='stars', blank=True)
+    rate = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+    trailer_link = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.title

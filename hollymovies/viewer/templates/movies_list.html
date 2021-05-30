@@ -9,15 +9,35 @@
 
 <h2>These are the movies we have:</h2>
 
-<ul>
-  {% for movie in movies %}
-  <li>Name: <a href="{% url 'detail_movie' movie.id %}"> {{movie.title}}</a> genre: {{movie.genre.name|default:"No Genre"}}</li>
-    {% if movie.genre.name == 'Horror' %}
-      Carefull!! This is terrifying!
-    {% endif %}
-  {% endfor %}
-</ul>
 
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+
+  {% for movie in movies %}
+  <div class="col mb-4">
+
+    <div class="card text-center" style="width: 18rem;">
+
+      {% if movie.cover %}
+        <img src="{{ movie.cover.url}}" width="300" height=auto class="card-img-top">
+      {% else %}
+        <img src="https://dummyimage.com/200x300/000/fff&text=NO+IMAGE" width="300" height=auto class="card-img-top">
+      {% endif %}
+
+  <div class="card-body">
+    <h5 class="card-title"><a href="{% url 'detail_movie' movie.id %}"> {{movie.title}}</a></h5>
+    <h6 class="card-subtitle mb-2 text-muted"> <i class="bi bi-star-half"></i> {{movie.rate | default:"No rating"}} </h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <button type="button" class="btn btn-primary"><i class="bi bi-plus"></i> Add to watch list</button>
+    {% if movie.trailer_link %}
+        <p> <a href="{{movie.trailer_link}}"> <i class="bi bi-play-fill"></i> Trailer</a></p>
+    {% endif %}
+  </div>
+</div>
+  </div>
+  {% endfor %}
+
+
+</div>
 
 Click <a href="{% url 'total' %}">here</a> to see the total
 
