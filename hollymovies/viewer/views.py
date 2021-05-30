@@ -6,7 +6,7 @@ from django.views.generic import TemplateView, ListView, CreateView, DetailView,
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .forms import SignUpForm
-
+from django.db.models import Q
 
 
 def hello(request, name):
@@ -39,7 +39,7 @@ class MoviesList(ListView):
         search = self.request.GET.get('search', None)
 
         if search:
-            queryset = Movie.objects.filter(title__contains=search)
+            queryset = Movie.objects.filter(Q(title__contains=search) | Q(genre__name__contains=search))
         else:
             queryset = Movie.objects.all()
 
