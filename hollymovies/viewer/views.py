@@ -34,6 +34,18 @@ class MoviesList(ListView):
     model = Movie
     context_object_name = 'movies'
 
+    def get_queryset(self):
+
+        search = self.request.GET.get('search', None)
+
+        if search:
+            queryset = Movie.objects.filter(title__contains=search)
+        else:
+            queryset = Movie.objects.all()
+
+        return queryset
+
+
 
 class CreateMovie(PermissionRequiredMixin, CreateView):
     template_name = 'create_movie.html'
