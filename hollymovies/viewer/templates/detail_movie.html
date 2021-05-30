@@ -11,6 +11,11 @@
 <p>Description: {{movie.description}}</p>
 <p>Languages: {% for lang in movie.languages.all %} {{lang.name}} {% endfor %}</p>
 
+{% if movie.trailer_link %}
+<p>Trailer:</p>
+<iframe src="{{movie.trailer_link}}"
+   width="560" height="315" frameborder="0" allowfullscreen></iframe>
+{% endif %}
 <hr>
 
 {% if perms.viewer.change_movie %}
